@@ -49,7 +49,8 @@ public class HbaseOperations {
         try(ResultScanner scanner = table.getScanner(scan)) {
             for (Result result : scanner) {
                 for (Cell cell : result.listCells()) {
-                    System.out.println("Qualifier: "+Bytes.toString(CellUtil.cloneQualifier(cell))
+                    System.out.println("Row: "+Bytes.toString(CellUtil.cloneRow(cell))
+                            +" Qualifier: "+Bytes.toString(CellUtil.cloneQualifier(cell))
                             +" Value: " + Bytes.toString(CellUtil.cloneValue(cell)));
                 }
             }
