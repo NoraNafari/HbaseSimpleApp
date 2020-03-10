@@ -17,8 +17,6 @@ public class NoranHbaseSimpleApp {
         HbaseOperations operations = new HbaseOperations();
         //Hbase configuration
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum","localhost");
-        configuration.set("hbase.zookeeper.property.clientPort", "2181");
         //Creating a table
         Connection connection = ConnectionFactory.createConnection(configuration);
         Admin admin = connection.getAdmin();
