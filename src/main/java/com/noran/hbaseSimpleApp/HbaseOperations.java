@@ -21,13 +21,13 @@ public class HbaseOperations {
     void putinATable(Admin admin, Table table) throws IOException {
         //Put data in table
         Put put1 = new Put(Bytes.toBytes("Row1"));
-        put1.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Nora"));
+        put1.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Kate"));
         put1.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("N"));
         put1.addImmutable(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("0000000"));
         table.put(put1);
 
         Put put2 = new Put(Bytes.toBytes("Row2"));
-        put2.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Mammad"));
+        put2.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Carl"));
         put2.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("A"));
         put2.addImmutable(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("111111"));
         table.put(put2);
