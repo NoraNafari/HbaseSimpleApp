@@ -26,6 +26,7 @@ public class NoranHbaseSimpleApp {
         operations.putinATable(admin,table);
         operations.getDataFromATable(table);
         operations.scanATable(table);
+        operations.scanAndFilter(table);
         operations.deleteATable(admin, TableName.valueOf("People"));
     }
 }

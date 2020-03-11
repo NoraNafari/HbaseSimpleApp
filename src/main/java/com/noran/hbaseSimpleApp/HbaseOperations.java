@@ -2,6 +2,10 @@ package com.noran.hbaseSimpleApp;
 
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.filter.CompareFilter;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.SubstringComparator;
+import org.apache.hadoop.hbase.filter.ValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
@@ -33,6 +37,15 @@ public class HbaseOperations {
         table.put(put2);
     }
 
+    void scanAndFilter(Table table) throws IOException {
+        Filter filter = new ValueFilter(CompareOperator.EQUAL,
+                new SubstringComparator("Carl"));
+
+        Scan scan = new Scan();
+        scan.setFilter(filter);
+        printResults(table, scan);
+    }
+
     void getDataFromATable(Table table) throws IOException {
         //Get data from a table
         Get get = new Get(Bytes.toBytes("Row1"));
@@ -45,8 +58,17 @@ public class HbaseOperations {
         scan.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"));
         scan.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"));
         scan.addColumn(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"));
+        printResults(table, scan);
+    }
 
-        try(ResultScanner scanner = table.getScanner(scan)) {
+    void deleteATable(Admin admin, TableName tableName) throws IOException {
+        //Delete a table
+            admin.disableTable(tableName);
+            admin.deleteTable(tableName);
+    }
+
+     private static void printResults(Table table, Scan scan) throws IOException {
+        ResultScanner scanner = table.getScanner(scan);
             for (Result result : scanner) {
                 for (Cell cell : result.listCells()) {
                     System.out.println("Row: "+Bytes.toString(CellUtil.cloneRow(cell))
@@ -54,11 +76,6 @@ public class HbaseOperations {
                             +" Value: " + Bytes.toString(CellUtil.cloneValue(cell)));
                 }
             }
-        }
-    }
-    void deleteATable(Admin admin, TableName tableName) throws IOException {
-        //Delete a table
-            admin.disableTable(tableName);
-            admin.deleteTable(tableName);
+
     }
 }
