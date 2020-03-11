@@ -21,15 +21,15 @@ public class HbaseOperations {
     void putinATable(Admin admin, Table table) throws IOException {
         //Put data in table
         Put put1 = new Put(Bytes.toBytes("Row1"));
-        put1.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Kate"));
-        put1.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("N"));
-        put1.addImmutable(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("0000000"));
+        put1.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Kate"));
+        put1.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("N"));
+        put1.addColumn(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("0000000"));
         table.put(put1);
 
         Put put2 = new Put(Bytes.toBytes("Row2"));
-        put2.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Carl"));
-        put2.addImmutable(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("A"));
-        put2.addImmutable(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("111111"));
+        put2.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("FirstName"), Bytes.toBytes("Carl"));
+        put2.addColumn(Bytes.toBytes("PersonalInfo"), Bytes.toBytes("LastName"), Bytes.toBytes("A"));
+        put2.addColumn(Bytes.toBytes("CreditInfo"), Bytes.toBytes("CreditCardNo"), Bytes.toBytes("111111"));
         table.put(put2);
     }
 
